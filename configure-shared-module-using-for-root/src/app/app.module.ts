@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SomeSharedModuleModule } from './some-shared-module/some-shared-module.module';
+import { SomeSharedModule } from './some-shared-module/some-shared.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,9 @@ import { SomeSharedModuleModule } from './some-shared-module/some-shared-module.
   ],
   imports: [
     BrowserModule,
-    SomeSharedModuleModule,
+    SomeSharedModule.forRoot({
+      someValue: 5000
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
