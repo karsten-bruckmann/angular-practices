@@ -1,0 +1,11 @@
+<ul>
+    <li
+        *ngFor="let option of options"
+        (click)="onSelect(option)"
+        [class.selected]="option === selected">
+        <ng-container
+            [ngTemplateOutlet]="optionTemplateRef"
+            [ngTemplateOutletContext]="{ $implicit: option }">
+        </ng-container>
+    </li>
+</ul>

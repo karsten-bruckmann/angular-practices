@@ -1,0 +1,17 @@
+<ng-template #helloWorldTemplate>
+    <p style="background: green">Hello world</p>
+</ng-template>
+
+<div style="background: red; padding: 10px;">
+    <ng-container [ngTemplateOutlet]="helloWorldTemplate"></ng-container>
+</div>
+
+<br>
+
+<app-selector [options]="options" (select)="onSelectorSelect($event)">
+    <ng-template #optionTemplate let-foo>
+        [ICON] {{ foo }}
+    </ng-template>
+</app-selector>
+
+selected: {{ selected }}
