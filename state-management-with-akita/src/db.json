@@ -1,0 +1,22 @@
+{
+  "comparisonItems":[
+    {
+      "id": 1,
+      "name": "Foo",
+      "contribution": 150,
+      "savings": 30
+    },
+    {
+      "id": 2,
+      "name": "Bar",
+      "contribution": 120,
+      "savings": 40
+    },
+    {
+      "id": 3,
+      "name": "Foobar",
+      "contribution": 250,
+      "savings": 20
+    }
+  ]
+}
