@@ -82,6 +82,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "state-management-with-akita"
+    }
+  },
+  "defaultProject": "state-management-with-akita",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
