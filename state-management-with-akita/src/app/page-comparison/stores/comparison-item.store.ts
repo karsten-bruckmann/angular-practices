@@ -1,12 +1,6 @@
-import { EntityState, EntityStore, ID, StoreConfig } from '@datorama/akita';
+import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 import { Injectable } from '@angular/core';
-
-export interface ComparisonItemInterface {
-    id: ID;
-    name: string;
-    contribution: number;
-    savings: number;
-}
+import { ComparisonItemInterface } from '../models/comparison-item.interface';
 
 export interface ComparisonItemsStateInterface extends EntityState<ComparisonItemInterface> {}
 

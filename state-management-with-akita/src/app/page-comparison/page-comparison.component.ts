@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ID } from '@datorama/akita';
+
+import { Observable } from 'rxjs';
+
 import { ComparisonItemService } from './services/comparison-item.service';
 import { ComparisonItemsQuery } from './queries/comparison-items.query';
-import { Observable } from 'rxjs';
-import { ComparisonItemInterface } from './stores/comparison-item.store';
+import { ComparisonItemInterface } from './models/comparison-item.interface';
 
 @Component({
   selector: 'app-page-comparison',
@@ -11,6 +14,7 @@ import { ComparisonItemInterface } from './stores/comparison-item.store';
 })
 export class PageComparisonComponent implements OnInit {
   public comparisonItems$: Observable<ComparisonItemInterface[]>;
+  public isLoading$: Observable<boolean>;
 
 
   constructor(
@@ -19,7 +23,13 @@ export class PageComparisonComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.comparisonItemService.getItems([1,2,3]).subscribe();
+    this.comparisonItemService.getItems().subscribe();
+
     this.comparisonItems$ = this.comparisonItemsQuery.selectAll();
+    this.isLoading$ = this.comparisonItemsQuery.selectLoading();
+  }
+
+  removeItem(id: ID) {
+    this.comparisonItemService.remove(id);
   }
 }

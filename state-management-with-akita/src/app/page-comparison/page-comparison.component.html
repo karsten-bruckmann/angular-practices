@@ -1,1 +1,11 @@
-{{ comparisonItems$ | async | json }}
+<ng-container *ngIf="isLoading$ | async; else comparisonItems">
+    Loading ...
+</ng-container>
+<ng-template #comparisonItems>
+    <page-comparison-comparison-item
+        *ngFor="let comparisonItem of comparisonItems$ | async"
+        [data]="comparisonItem"
+        (remove)="removeItem($event)">
+    </page-comparison-comparison-item>
+</ng-template>
+
