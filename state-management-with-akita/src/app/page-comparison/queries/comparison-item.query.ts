@@ -3,12 +3,19 @@ import { isArray, QueryEntity } from '@datorama/akita';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { switchMap } from 'rxjs/operators';
 
-import { ComparisonItemsStateInterface, ComparisonItemStore } from '../stores/comparison-item.store';
+import { Observable } from 'rxjs';
+import { ComparisonItemInterface } from '../models/comparison-item.interface';
+import {
+    ComparisonItemsStateInterface,
+    ComparisonItemStore,
+} from '../stores/comparison-item.store';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class ComparisonItemQuery extends QueryEntity<ComparisonItemsStateInterface> {
+export class ComparisonItemQuery extends QueryEntity<
+    ComparisonItemsStateInterface
+> {
     constructor(
         protected comparisonItemStore: ComparisonItemStore,
         private routerQuery: RouterQuery
@@ -16,11 +23,15 @@ export class ComparisonItemQuery extends QueryEntity<ComparisonItemsStateInterfa
         super(comparisonItemStore);
     }
 
-    public selectComparisonItems$ = this.routerQuery.selectQueryParams('id').pipe(switchMap((ids: string[] | string) => {
-        if (!isArray(ids)) {
-            ids = [ids];
-        }
+    public selectComparisonItems$: Observable<
+        ComparisonItemInterface[]
+    > = this.routerQuery.selectQueryParams('id').pipe(
+        switchMap((ids: string[] | string) => {
+            if (!isArray(ids)) {
+                ids = [ids];
+            }
 
-        return this.selectMany(ids);
-    }))
+            return this.selectMany(ids);
+        })
+    );
 }

@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { environment } from '../environments/environment';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AppRoutingModule } from './app-routing.module';
 import { PageComparisonModule } from './page-comparison/page-comparison.module';
 
+import { AppComponent } from './app.component';
+
+import { environment } from '../environments/environment';
+
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    environment.production ? [AkitaNgRouterStoreModule] : [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule],
-    AkitaNgRouterStoreModule.forRoot(),
-    PageComparisonModule,
-  ],
-  providers: [{ provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        environment.production
+            ? [AkitaNgRouterStoreModule]
+            : [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule],
+        AkitaNgRouterStoreModule.forRoot(),
+        PageComparisonModule,
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

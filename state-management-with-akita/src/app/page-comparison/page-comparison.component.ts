@@ -4,56 +4,56 @@ import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
-import { ComparisonItemService } from './services/comparison-item.service';
-import { ComparisonItemQuery } from './queries/comparison-item.query';
-import { ComparisonItemInterface } from './models/comparison-item.interface';
 import { take } from 'rxjs/operators';
+import { ComparisonItemInterface } from './models/comparison-item.interface';
+import { ComparisonItemQuery } from './queries/comparison-item.query';
+import { ComparisonItemService } from './services/comparison-item.service';
 
 @Component({
-  selector: 'page-comparison',
-  templateUrl: './page-comparison.component.html',
-  styleUrls: ['./page-comparison.component.less']
+    selector: 'page-comparison',
+    templateUrl: './page-comparison.component.html',
+    styleUrls: ['./page-comparison.component.less'],
 })
 export class PageComparisonComponent implements OnInit {
-  public comparisonItems$: Observable<ComparisonItemInterface[]>;
-  public isLoading$: Observable<boolean>;
+    public comparisonItems$: Observable<ComparisonItemInterface[]>;
+    public isLoading$: Observable<boolean>;
 
+    constructor(
+        private comparisonItemService: ComparisonItemService,
+        private comparisonItemsQuery: ComparisonItemQuery,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
-  constructor(
-      private comparisonItemService: ComparisonItemService,
-      private comparisonItemsQuery: ComparisonItemQuery,
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-  ) {}
+    public ngOnInit(): void {
+        this.comparisonItemService
+            .getItems(this.activatedRoute.snapshot.queryParams['id'])
+            .pipe(take(1))
+            .subscribe();
 
-  ngOnInit() {
-    this.comparisonItemService.getItems(
-        this.activatedRoute.snapshot.queryParams['id']
-    ).pipe(take(1)).subscribe();
-
-    this.comparisonItems$ = this.comparisonItemsQuery.selectComparisonItems$;
-    this.isLoading$ = this.comparisonItemsQuery.selectLoading();
-
-    this.comparisonItems$.subscribe((items) => {
-      console.table(items);
-    })
-  }
-
-  removeItem(id: ID) {
-    const queryParams = this.activatedRoute.snapshot.queryParams['id'];
-
-    if (queryParams.length <= 1) {
-      return;
+        this.comparisonItems$ = this.comparisonItemsQuery.selectComparisonItems$;
+        this.isLoading$ = this.comparisonItemsQuery.selectLoading();
     }
 
-    const newQueryParams = queryParams.filter(itemId => itemId !== id.toString(10));
+    public removeItem(id: ID): void {
+        const queryParams = this.activatedRoute.snapshot.queryParams['id'];
 
-    this.router.navigate([], { queryParams: {
-        id: newQueryParams
-      }});
-  }
+        if (queryParams.length <= 1) {
+            return;
+        }
 
-  onRecommendationChange(id: ID, event): void {
-    this.comparisonItemService.setRecommendation(id, event.target.value);
-  }
+        const newQueryParams = queryParams.filter(
+            (itemId: ID) => itemId !== id.toString(10)
+        );
+
+        this.router.navigate([], {
+            queryParams: {
+                id: newQueryParams,
+            },
+        });
+    }
+
+    public onRecommendationChange(id: ID, event: Event): void {
+        this.comparisonItemService.setRecommendation(id, event.target['value']);
+    }
 }
