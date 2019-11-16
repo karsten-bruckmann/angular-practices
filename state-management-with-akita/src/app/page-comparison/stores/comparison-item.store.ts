@@ -1,5 +1,6 @@
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 import { Injectable } from '@angular/core';
+
 import { ComparisonItemInterface } from '../models/comparison-item.interface';
 
 export interface ComparisonItemsStateInterface extends EntityState<ComparisonItemInterface> {}
@@ -8,7 +9,7 @@ export interface ComparisonItemsStateInterface extends EntityState<ComparisonIte
     providedIn: 'root'
 })
 @StoreConfig({
-    name: 'comparisonItems'
+    name: 'comparisonItem'
 })
 export class ComparisonItemStore extends EntityStore<ComparisonItemsStateInterface> {
     constructor() {

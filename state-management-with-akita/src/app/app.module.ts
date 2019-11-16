@@ -16,7 +16,7 @@ import { PageComparisonModule } from './page-comparison/page-comparison.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    environment.production ? [AkitaNgRouterStoreModule] : [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule],
     AkitaNgRouterStoreModule.forRoot(),
     PageComparisonModule,
   ],

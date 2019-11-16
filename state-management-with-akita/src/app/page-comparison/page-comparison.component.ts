@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ID } from '@datorama/akita';
 
 import { Observable } from 'rxjs';
 
 import { ComparisonItemService } from './services/comparison-item.service';
-import { ComparisonItemsQuery } from './queries/comparison-items.query';
+import { ComparisonItemQuery } from './queries/comparison-item.query';
 import { ComparisonItemInterface } from './models/comparison-item.interface';
 
 @Component({
@@ -19,17 +20,32 @@ export class PageComparisonComponent implements OnInit {
 
   constructor(
       private comparisonItemService: ComparisonItemService,
-      private comparisonItemsQuery: ComparisonItemsQuery
+      private comparisonItemsQuery: ComparisonItemQuery,
+      private router: Router,
+      private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.comparisonItemService.getItems().subscribe();
+    // Initial call
+    this.comparisonItemService.getItems(
+        this.activatedRoute.snapshot.queryParams['id']
+    ).subscribe();
 
-    this.comparisonItems$ = this.comparisonItemsQuery.selectAll();
+    this.comparisonItems$ = this.comparisonItemsQuery.selectComparisonItems$;
     this.isLoading$ = this.comparisonItemsQuery.selectLoading();
   }
 
   removeItem(id: ID) {
-    this.comparisonItemService.remove(id);
+    const queryParams = this.activatedRoute.snapshot.queryParams['id'];
+
+    if (queryParams.length <= 1) {
+      return;
+    }
+
+    const newQueryParams = queryParams.filter(itemId => itemId !== id.toString(10));
+
+    this.router.navigate([], { queryParams: {
+        id: newQueryParams
+      }});
   }
 }
