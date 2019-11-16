@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ComparisonItemService } from './services/comparison-item.service';
 import { ComparisonItemQuery } from './queries/comparison-item.query';
 import { ComparisonItemInterface } from './models/comparison-item.interface';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'page-comparison',
@@ -26,13 +27,16 @@ export class PageComparisonComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Initial call
     this.comparisonItemService.getItems(
         this.activatedRoute.snapshot.queryParams['id']
-    ).subscribe();
+    ).pipe(take(1)).subscribe();
 
     this.comparisonItems$ = this.comparisonItemsQuery.selectComparisonItems$;
     this.isLoading$ = this.comparisonItemsQuery.selectLoading();
+
+    this.comparisonItems$.subscribe((items) => {
+      console.table(items);
+    })
   }
 
   removeItem(id: ID) {
@@ -47,5 +51,9 @@ export class PageComparisonComponent implements OnInit {
     this.router.navigate([], { queryParams: {
         id: newQueryParams
       }});
+  }
+
+  onRecommendationChange(id: ID, event): void {
+    this.comparisonItemService.setRecommendation(id, event.target.value);
   }
 }

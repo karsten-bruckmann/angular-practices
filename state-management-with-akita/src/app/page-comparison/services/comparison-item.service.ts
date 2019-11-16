@@ -32,4 +32,8 @@ export class ComparisonItemService {
   public remove(id: ID) {
       this.comparisonItemStore.remove(id);
   }
+
+  public setRecommendation(id: ID, value: string): void {
+      this.comparisonItemStore.update(id, { recommendation: value });
+  }
 }

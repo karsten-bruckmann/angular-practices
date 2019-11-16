@@ -2,9 +2,20 @@
     Loading ...
 </ng-container>
 <ng-template #comparisonItems>
-    <page-comparison-comparison-item
-        *ngFor="let comparisonItem of comparisonItems$ | async"
-        [data]="comparisonItem"
-        (remove)="removeItem($event)">
-    </page-comparison-comparison-item>
+    <div class="recommendation">
+        <select
+            *ngFor="let comparisonItem of comparisonItems$ | async"
+            (change)="onRecommendationChange(comparisonItem.id, $event)">
+            <option value="red" [selected]="comparisonItem.recommendation === 'red'">Rot</option>
+            <option value="green" [selected]="comparisonItem.recommendation === 'green'">Grün</option>
+            <option value="yellow" [selected]="comparisonItem.recommendation === 'yellow'">Gelb</option>
+        </select>
+    </div>
+    <div class="comparison-items">
+        <page-comparison-comparison-item
+            *ngFor="let comparisonItem of comparisonItems$ | async"
+            [data]="comparisonItem"
+            (remove)="removeItem($event)">
+        </page-comparison-comparison-item>
+    </div>
 </ng-template>

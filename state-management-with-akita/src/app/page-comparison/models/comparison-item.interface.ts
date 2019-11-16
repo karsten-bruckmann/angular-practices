@@ -5,4 +5,5 @@ export interface ComparisonItemInterface {
     name: string;
     contribution: number;
     savings: number;
+    recommendation?: string;
 }
