@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PageComparisonComponent } from './page-comparison/page-comparison.component';
 
-
-const routes: Routes = [{
-  path: '',
-  component: PageComparisonComponent
-}];
+const routes: Routes = [
+    {
+        path: '',
+        component: PageComparisonComponent,
+    },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
