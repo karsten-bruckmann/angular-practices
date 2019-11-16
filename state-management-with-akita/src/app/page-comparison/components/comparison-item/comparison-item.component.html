@@ -1,4 +1,6 @@
-<button (click)="removeItem()">x</button><br><br>
-<strong>{{ data.name }}</strong><br><br>
-{{ data.contribution | currency }}<br>
+<div class="button">
+    <button (click)="removeItem()">x</button><br><br>
+</div>
+<div class="name">{{ data.name }}</div>
+<div class="contribution">{{ data.contribution | currency }}</div>
 <small>{{ data.savings | currency }}</small>

@@ -9,7 +9,7 @@ import { ComparisonItemQuery } from './queries/comparison-item.query';
 import { ComparisonItemInterface } from './models/comparison-item.interface';
 
 @Component({
-  selector: 'app-page-comparison',
+  selector: 'page-comparison',
   templateUrl: './page-comparison.component.html',
   styleUrls: ['./page-comparison.component.less']
 })
