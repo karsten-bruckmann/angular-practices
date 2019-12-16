@@ -1,0 +1,19 @@
+{
+  "name": "angular-practices",
+  "version": "1.0.0",
+  "description": "Collection of my angular practices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-marlon/angular-practices.git"
+  },
+  "author": "Marlon Hänsdieke",
+  "bugs": {
+    "url": "https://github.com/dev-marlon/angular-practices/issues"
+  },
+  "homepage": "https://github.com/dev-marlon/angular-practices#readme",
+  "dependencies": {}
+}
