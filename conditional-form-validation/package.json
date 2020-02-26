@@ -30,8 +30,10 @@
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@types/node": "~8.9.4",
+    "angular-tslint-config": "git+https://github.com/dev-marlon/angular-tslint-config.git#2.0.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "codelyzer": "~5.2.1",
+    "tslint": "~5.16.0"
   }
 }
