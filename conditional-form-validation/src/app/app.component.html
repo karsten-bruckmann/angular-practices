@@ -1,1 +1,37 @@
-Conditional Form Validation
+<h1>Conditional Form Validation</h1>
+
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="isActive">E-Mail</label>
+        <input id="isActive" type="checkbox" formControlName="isActive">
+    </div>
+    <div>
+        <label for="recipient">Recipient</label>
+        <input id="recipient" type="text" formControlName="recipient">
+        <span
+            *ngIf="emailForm.get('recipient').hasError('required') && emailForm.touched">
+            Invalid
+        </span>
+    </div>
+    <div>
+        <label for="subject">Subject</label>
+        <input id="subject" type="text" formControlName="subject">
+    </div>
+    <div>
+        <label for="message">Message</label>
+        <textarea id="message" formControlName="message">
+        </textarea>
+    </div>
+    <div>
+        <label></label>
+        <button type="submit">
+            Send
+        </button>
+    </div>
+</form>
+
+Value: {{ emailForm.value | json }}
+
+Valid: {{ emailForm.valid | json }}
+
+
